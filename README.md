@@ -5,7 +5,7 @@ This is a basic library for interacting with the [Timedoctor REST API](https://w
 ## Installation
 
 ```
-npm i -s timedoctor
+npm i -s parkerself22/timedoctor#master
 ```
 
 ## Getting Started
