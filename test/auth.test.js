@@ -8,13 +8,13 @@ const nock = require('nock')
 chai.should();
 
 const {td, company_id} = require("./helpers");
-const Auth = td.Auth,
+const Auth = td.Base.Auth,
     worklogsJson = require("./mocked-responses/worklogs.json");
 
 describe("utilities/Auth", () => {
     it("get the OAuth Url", async () => {
         let url = Auth.getAuthUrl("r");
-        url.should.eq(`https://webapi.timedoctor.com/oauth/v2/auth?client_id=${td.Auth.client_key}&response_type=code&redirect_uri=r`)
+        url.should.eq(`https://webapi.timedoctor.com/oauth/v2/auth?client_id=${td.Base.Auth.client_key}&response_type=code&redirect_uri=r`)
 
     });
 
@@ -24,11 +24,11 @@ describe("utilities/Auth", () => {
                 return uri.indexOf("/token") >= 0;
             })
             .reply(200, {access_token: "1234", refresh_token: "1234"});
-        let stub = sinon.stub(td.Auth, "setTokens");
-        await td.Auth.refresh();
+        let stub = sinon.stub(td.Base.Auth, "setTokens");
+        await td.Base.Auth.refresh();
 
-        td.Auth.refresh_token.should.eq("1234")
-        td.Auth.access_token.should.eq("1234")
+        td.Base.Auth.refresh_token.should.eq("1234")
+        td.Base.Auth.access_token.should.eq("1234")
         stub.called.should.eq(true);
     });
 
@@ -44,7 +44,7 @@ describe("utilities/Auth", () => {
         const req = {
             query: {code: "1234"}
         }
-        await td.Auth.handleCallback(req, res, "test.com");
+        await td.Base.Auth.handleCallback(req, res, "test.com");
 
         res.send.called.should.eq(true);
         res.send.getCall(0).args[0].should.eq("Access Token: 1234 \nRefresh Token: 1234")
@@ -62,7 +62,7 @@ describe("utilities/Auth", () => {
         const req = {
             query: {code: "1234"}
         }
-        await td.Auth.handleCallback(req, res, "test.com");
+        await td.Base.Auth.handleCallback(req, res, "test.com");
 
         res.send.called.should.eq(true);
         res.send.getCall(0).args[0].should.eq("Error: test")

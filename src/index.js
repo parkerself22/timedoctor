@@ -6,7 +6,7 @@
  * @param company_id
  * @param client_key
  * @param client_secret
- * @return {{Auth, AbsentLate, Users, Worklogs}}
+ * @return {{Companies, AbsentLate, Users, Worklogs, Base: Timedoctor}}
  */
 function timedoctor(getTokens, setTokens, company_id, client_key, client_secret) {
     if( !client_secret || !client_key ) {
@@ -20,15 +20,17 @@ function timedoctor(getTokens, setTokens, company_id, client_key, client_secret)
         Timedoctor: require("./timedoctor"),
         AbsentLate: require("./absent-late"),
         Users: require("./users"),
-        Worklogs: require("./worklogs")
+        Worklogs: require("./worklogs"),
+        Companies: require("./companies")
     }
     const base = new api.Timedoctor(getTokens, setTokens, company_id, client_key, client_secret);
 
     return {
-        ...base,
-        AbsentLate: new api.AbsentLate(getTokens, setTokens, company_id, client_key , client_secret),
-        Users: new api.Users(getTokens, setTokens, company_id, client_key , client_secret),
-        Worklogs: new api.Worklogs(getTokens, setTokens, company_id, client_key , client_secret)
+        Base: base,
+        Companies: new api.Companies(base),
+        AbsentLate: new api.AbsentLate(base),
+        Users: new api.Users(base),
+        Worklogs: new api.Worklogs(base)
     }
 }
 module.exports = timedoctor;

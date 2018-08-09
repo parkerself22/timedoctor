@@ -8,15 +8,15 @@ const nock = require('nock')
 chai.should();
 
 const Timedoctor = require("../src/timedoctor");
-const {td, company_id, saveTokens, getTokens} = require("./helpers");
+const {company_id, saveTokens, getTokens} = require("./helpers");
 const companyJson = require("./mocked-responses/company.json");
 
 
 describe("Timedoctor", () => {
     it("has a default props", async () => {
-        expect(td).to.have.property("company_id");
-        expect(td).to.have.property("Companies");
-        expect(td).to.have.property("Auth");
+        const instance = new Timedoctor(getTokens, saveTokens(), company_id, "test", "test")
+        expect(instance).to.have.property("company_id");
+        expect(instance).to.have.property("Auth");
     });
 
     it("handles errors", async () => {
@@ -24,32 +24,7 @@ describe("Timedoctor", () => {
         return instance.handleError(new Error("test")).should.be.rejected;
     });
 
-    it("GET /companies", async() => {
-        const instance = new Timedoctor(getTokens, saveTokens, company_id, "test", "test");
-        nock(`https://webapi.timedoctor.com/v1.1`)
-            .get(function(uri) {
-                return uri.indexOf("/companies") >= 0;
-            })
-            .reply(200, companyJson);
-
-        let result = await instance.getCompanies();
-
-        result.error.should.eq(false);
-        result.errorMessage.should.eq(false);
-        result.response.should.be.an("object");
-        result.response.accounts.should.be.an("array")
-        result.response.user.should.be.an("object")
-    });
-
-    it("sets company id", () => {
-        const instance = new Timedoctor(getTokens, saveTokens, company_id, "test", "test");
-        let newId = Math.random()
-        instance.setCompany(newId);
-
-        instance.company_id.should.eq(newId);
-    });
-
-    it("requires company id to call and endpoint", async () => {
+    it("requires company id to call an endpoint", async () => {
         const instance = new Timedoctor(getTokens, saveTokens, false, "test", "test");
         return instance.query().should.be.rejected;
     });

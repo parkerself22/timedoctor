@@ -1,20 +1,17 @@
 'use strict'
 const request = require("request-promise-native"),
+    /** @class Auth */
     Auth = require("./utilities/auth");
 /**
  * @class Timedoctor
- * @property Auth
- * @property company_id
+ * @property Auth {Auth}
+ * @property company_id {number}
  *
  */
 class Timedoctor {
     constructor(getTokens, setTokens, company_id, client_key, client_secret) {
        this.company_id = company_id;
        this.Auth = new Auth(getTokens, setTokens, client_key, client_secret);
-       this.Companies = {
-           get: this.getCompanies,
-           set: this.setCompany
-       }
     }
 
     /**
@@ -25,41 +22,6 @@ class Timedoctor {
      */
     handleError(message = 'Fatal error occured') {
         return Promise.reject(message);
-    }
-
-    /**
-     * Get companies that the token can access
-     * (this is the only endpoint accessible without company_id)
-     * @return {Promise}
-     */
-    async getCompanies() {
-        try {
-            let response = await request({
-                method: 'GET',
-                url: `https://webapi.timedoctor.com/v1.1/companies`,
-                json: true,
-                qs: { access_token: this.Auth.access_token }
-            });
-            return {
-                error: false,
-                errorMessage: false,
-                response
-            };
-        } catch(e) {
-            return {
-                error: true,
-                errorMessage: e,
-                response: null
-            }
-        }
-    }
-
-    /**
-     * Set the company_id
-     * @param company_id {number}
-     */
-    setCompany(company_id) {
-        this.company_id = company_id;
     }
 
     /**

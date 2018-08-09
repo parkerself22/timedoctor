@@ -1,9 +1,19 @@
 'use strict'
-const Timedoctor = require('./Timedoctor');
-
-class Worklogs extends Timedoctor {
+/**
+ * @class Worklogs
+ * @property {Timedoctor} td
+ * @property {function(start_date<Date>, end_date<Date>, params?)} get
+ */
+class Worklogs {
     /**
-     * Get all the users
+     * @param td {Timedoctor}
+     */
+    constructor(td) {
+        this.td = td;
+    }
+
+    /**
+     * Get all the worklogs
      * @param start_date {Date}
      * @param end_date {Date}
      * @param params {{[user_ids]:[number],[task_ids]: [number],[project_ids]: [number],
@@ -13,18 +23,18 @@ class Worklogs extends Timedoctor {
     get(start_date, end_date, params = {}) {
         if(!start_date || !end_date) {return this.handleError("Both start_date and end_date are required")}
 
-        params.start_date = this.toTDDate(start_date);
-        params.end_date = this.toTDDate(end_date);
+        params.start_date = this.td.toTDDate(start_date);
+        params.end_date = this.td.toTDDate(end_date);
 
         if(params.last_modified) {
-            params.last_modified = this.toTDDate(params.last_modified);
+            params.last_modified = this.td.toTDDate(params.last_modified);
         }
 
         let options = {
             uri: `/worklogs`,
             qs: params
         }
-        return this.query(options);
+        return this.td.query(options);
     }
 }
 module.exports = Worklogs;

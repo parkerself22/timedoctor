@@ -1,8 +1,18 @@
 'use strict'
 
-const Timedoctor = require('./Timedoctor');
-
-class Users extends Timedoctor {
+/**
+ * @class Users
+ * @property td {Timedoctor}
+ * @property getUsers {function(emails?)}
+ * @property getUser {function(user_id)}
+ */
+class Users {
+    /**
+     * @param td {Timedoctor}
+     */
+    constructor(td) {
+        this.td = td;
+    }
     /**
      * Get all the users
      * @param emails {Array?}
@@ -15,7 +25,7 @@ class Users extends Timedoctor {
         if(emails) {
             options.qs = {emails: emails.join(",")};
         }
-        return this.query(options);
+        return this.td.query(options);
     }
 
     /**
@@ -25,9 +35,9 @@ class Users extends Timedoctor {
      */
     getUser(user_id) {
         if(!user_id) {
-            return this.handleError("No User ID provided");
+            return this.td.handleError("No User ID provided");
         }
-        return this.query({
+        return this.td.query({
             uri: `/users/${user_id}`
         });
     }

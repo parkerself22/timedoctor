@@ -1,10 +1,17 @@
 const request = require("request-promise-native");
 
+/**
+ * @class Auth
+ * @property getTokens {function}
+ * @property setTokens {function(access_token, refresh_token)}
+ * @property refresh {function}
+ * @property getAuthUrl {function}
+ * @property handleCallback {function}
+ */
 class Auth {
     /**
-     *
-     * @param getTokens {Function}
-     * @param setTokens {Function}
+     * @param getTokens {function}
+     * @param setTokens {function(access_token, refresh_token)}
      * @param client_key
      * @param client_secret
      */
@@ -16,8 +23,6 @@ class Auth {
 
         this.access_token = tokens.access_token;
         this.refresh_token = tokens.refresh_token;
-
-
 
         this.client_key = client_key
         this.client_secret = client_secret

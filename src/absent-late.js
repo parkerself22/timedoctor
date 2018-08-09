@@ -1,7 +1,18 @@
 'use strict'
-const Timedoctor = require('./Timedoctor');
 
-class AbsentLate extends Timedoctor {
+/**
+ * @class AbsentLate
+ * @property {Timedoctor} td
+ * @property {function(params?)} get
+ * @property {function(reasons, params?)} put
+ */
+class AbsentLate {
+    /**
+     * @param td {Timedoctor}
+     */
+    constructor(td) {
+        this.td = td;
+    }
     /**
      * Get all the users
      * @param params {{userId?: String, start_date?: Date, end_date?: Date, offset?: number, limit?: number}}
@@ -9,16 +20,16 @@ class AbsentLate extends Timedoctor {
      */
     get(params = {}) {
         if(params.start_date)  {
-            params.start_date = this.toTDDate(params.start_date)
+            params.start_date = this.td.toTDDate(params.start_date)
         }
         if(params.end_date)  {
-            params.end_date = this.toTDDate(params.end_date)
+            params.end_date = this.td.toTDDate(params.end_date)
         }
         let options = {
             uri: `/absent-and-late`,
             qs: params
         }
-        return this.query(options);
+        return this.td.query(options);
     }
 
     /**
@@ -40,7 +51,7 @@ class AbsentLate extends Timedoctor {
             qs: params,
             method: "PUT"
         }
-        return this.query(options);
+        return this.td.query(options);
     }
 }
 module.exports = AbsentLate;
