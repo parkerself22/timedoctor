@@ -20,11 +20,11 @@ function setup(client_key, client_secret, redirect_base) {
     const redirectUri = redirect_base + "/auth/timedoctor";
 
     app.get("/login", (req,res) => {
-        res.redirect(td.Auth.getAuthUrl(redirectUri))
+        res.redirect(td.Base.Auth.getAuthUrl(redirectUri))
     });
 
     app.use("/auth/timedoctor", async (req,res,next) => {
-        await td.Auth.handleCallback(req,res,redirectUri);
+        await td.Base.Auth.handleCallback(req,res,redirectUri);
     });
     app.get("/", (req,res) => {
         res.send("Ok");
