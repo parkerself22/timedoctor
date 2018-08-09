@@ -1,34 +1,34 @@
 {
   "count": 1,
-  "url": "https:\/\/webapi.timedoctor.com\/v1.1\/companies\/413748\/users",
+  "url": "https:\/\/webapi.timedoctor.com\/v1.1\/companies\/1234\/users",
   "users": [
     {
       "full_name": "Parker Self ",
       "first_name": "Parker  Self  ",
       "last_name": "",
-      "email": "parker@go2impact.com",
-      "url": "https:\/\/webapi.timedoctor.com\/v1.1\/companies\/413748\/users\/949833",
+      "email": "parker@test.com",
+      "url": "https:\/\/webapi.timedoctor.com\/v1.1\/companies\/1234\/users\/1234",
       "user_id": 1234,
       "company_id": 1,
       "level": "admin",
       "projects": {
         "currently_assigned": {
           "count": "156",
-          "url": "https:\/\/webapi.timedoctor.com\/v1.1\/companies\/413748\/users\/949833\/projects?all=0"
+          "url": "https:\/\/webapi.timedoctor.com\/v1.1\/companies\/1234\/users\/1234\/projects?all=0"
         },
         "all": {
           "count": "739",
-          "url": "https:\/\/webapi.timedoctor.com\/v1.1\/companies\/413748\/users\/949833\/projects?all=1"
+          "url": "https:\/\/webapi.timedoctor.com\/v1.1\/companies\/1234\/users\/1234\/projects?all=1"
         }
       },
       "tasks": {
         "all": {
           "count": 1935,
-          "url": "https:\/\/webapi.timedoctor.com\/v1.1\/companies\/413748\/users\/949833\/tasks?status=all"
+          "url": "https:\/\/webapi.timedoctor.com\/v1.1\/companies\/1234\/users\/1234\/tasks?status=all"
         },
         "active": {
           "count": 393,
-          "url": "https:\/\/webapi.timedoctor.com\/v1.1\/companies\/413748\/users\/949833\/tasks?status=active"
+          "url": "https:\/\/webapi.timedoctor.com\/v1.1\/companies\/1234\/users\/1234\/tasks?status=active"
         }
       },
       "work_status": {
@@ -40,7 +40,7 @@
       "teams": [],
       "payroll_access": 1,
       "billing_access": 1,
-      "avatar": "https:\/\/s3.amazonaws.com\/tds3_avatars\/949833.jpg",
+      "avatar": "https:\/\/s3.amazonaws.com\/tds3_avatars\/1234.jpg",
       "screenshots_active": "0",
       "manual_time": "1",
       "permanent_tasks": 1,

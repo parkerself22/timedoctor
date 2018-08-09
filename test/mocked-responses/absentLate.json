@@ -1,6 +1,6 @@
 [
   {
-    "fullname": "Parker Self",
+    "fullname": "Test",
     "schedules": [
       {
         "shiftStartsTs": 1533196800,
@@ -32,7 +32,7 @@
         "shiftLength": "10h 30m",
         "shiftBreakTime": "<1m",
         "shiftBreakTimeInt": 0.0094444444444444,
-        "fullName": "Parker Self"
+        "fullName": "Test"
       },
       {
         "shiftStartsTs": 1533283200,
@@ -64,7 +64,7 @@
         "shiftLength": "10h 30m",
         "shiftBreakTime": "0m",
         "shiftBreakTimeInt": 0,
-        "fullName": "Parker Self"
+        "fullName": "Test"
       }
     ],
     "companyReasons": [
