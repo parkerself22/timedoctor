@@ -6,7 +6,7 @@
   "scripts": {
     "test": "NODE_ENV=test nyc npm run mocha && npm run coverage",
     "coverage": "nyc report --reporter=lcov",
-    "mocha": "mocha --require co-mocha --timeout 5000 --exit test/**.test.js"
+    "mocha": "mocha --require co-mocha --timeout 3000 --exit test/**.test.js"
   },
   "keywords": [
     "timedoctor"

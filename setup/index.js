@@ -13,7 +13,7 @@ function setup(client_key, client_secret, redirect_base) {
         console.log("Refresh: " + refresh);
     }
 
-    const td = require("../src/index")(getTokens, setTokens, company_id, client_key, client_secret),
+    const td = require("../src/index")(getTokens, setTokens, false, client_key, client_secret),
         express = require('express'),
         app = express();
 
@@ -26,6 +26,10 @@ function setup(client_key, client_secret, redirect_base) {
     app.use("/auth/timedoctor", async (req,res,next) => {
         await td.Auth.handleCallback(req,res,redirectUri);
     });
+    app.get("/", (req,res) => {
+        res.send("Ok");
+    })
+
     const port = (process.env.PORT || 3000);
 
     app.listen(port, () => {
