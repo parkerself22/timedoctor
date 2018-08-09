@@ -1,0 +1,52 @@
+{
+  "full_name": "Parker Self ",
+  "first_name": "Parker  Self  ",
+  "last_name": "",
+  "email": "parker@go2impact.com",
+  "url": "https:\/\/webapi.timedoctor.com\/v1.1\/companies\/413748\/users\/949833",
+  "user_id": 1234,
+  "company_id": 413748,
+  "level": "admin",
+  "projects": {
+    "currently_assigned": {
+      "count": "156",
+      "url": "https:\/\/webapi.timedoctor.com\/v1.1\/companies\/413748\/users\/949833\/projects?all=0"
+    },
+    "all": {
+      "count": "739",
+      "url": "https:\/\/webapi.timedoctor.com\/v1.1\/companies\/413748\/users\/949833\/projects?all=1"
+    }
+  },
+  "tasks": {
+    "all": {
+      "count": 1935,
+      "url": "https:\/\/webapi.timedoctor.com\/v1.1\/companies\/413748\/users\/949833\/tasks?status=all"
+    },
+    "active": {
+      "count": 393,
+      "url": "https:\/\/webapi.timedoctor.com\/v1.1\/companies\/413748\/users\/949833\/tasks?status=active"
+    }
+  },
+  "work_status": {
+    "code": "offline",
+    "info": "Offline",
+    "current_task": null
+  },
+  "managed_users": [],
+  "teams": [],
+  "payroll_access": 1,
+  "billing_access": true,
+  "avatar": "https:\/\/s3.amazonaws.com\/tds3_avatars\/949833.jpg",
+  "screenshots_active": "0",
+  "manual_time": "1",
+  "permanent_tasks": 1,
+  "computer_time_popup": "540",
+  "poor_time_popup": "-1",
+  "blur_screenshots": 0,
+  "web_and_app_monitoring": "1",
+  "webcam_shots": 0,
+  "screenshots_interval": "9",
+  "user_role_value": null,
+  "status": "active",
+  "reports_hidden": null
+}

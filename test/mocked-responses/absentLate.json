@@ -1,0 +1,94 @@
+[
+  {
+    "fullname": "Parker Self",
+    "schedules": [
+      {
+        "shiftStartsTs": 1533196800,
+        "mustBeCompletedByTs": 1533234600,
+        "minimumHours": "7h 30m",
+        "minimumHoursSec": 27000,
+        "actualStart": "08:00 AM",
+        "hoursWorked": "10:29:26",
+        "status": "Full Attendance",
+        "futureStatus": "-",
+        "reason": "",
+        "reasonOther": "",
+        "icon": "",
+        "isFutureDate": 0,
+        "isChecked": false,
+        "isLate": false,
+        "monitorLateStatus": 1,
+        "actualEndTimeStamp": 1533234600,
+        "actualEndTime": "6:30 PM",
+        "actualStartAttendance": "8:00 AM",
+        "shiftEndTime": "6:30 PM",
+        "hoursWorkedInt": 10.490555555556,
+        "secondsWorked": 37766,
+        "currentShift": 0,
+        "shiftStarts": "Thu, Aug 02, 08:00 AM",
+        "shiftStartDate": "Aug 2, 2018",
+        "shiftStartTime": "8:00 AM",
+        "mustBeCompletedBy": "Thu, Aug 02, 06:30 PM",
+        "shiftLength": "10h 30m",
+        "shiftBreakTime": "<1m",
+        "shiftBreakTimeInt": 0.0094444444444444,
+        "fullName": "Parker Self"
+      },
+      {
+        "shiftStartsTs": 1533283200,
+        "mustBeCompletedByTs": 1533321000,
+        "minimumHours": "7h 30m",
+        "minimumHoursSec": 27000,
+        "actualStart": "08:00 AM",
+        "hoursWorked": "10:30:00",
+        "status": "Full Attendance",
+        "futureStatus": "-",
+        "reason": "",
+        "reasonOther": "",
+        "icon": "",
+        "isFutureDate": 0,
+        "isChecked": false,
+        "isLate": false,
+        "monitorLateStatus": 1,
+        "actualEndTimeStamp": 1533321000,
+        "actualEndTime": "6:30 PM",
+        "actualStartAttendance": "8:00 AM",
+        "shiftEndTime": "6:30 PM",
+        "hoursWorkedInt": 10.5,
+        "secondsWorked": 37800,
+        "currentShift": 0,
+        "shiftStarts": "Fri, Aug 03, 08:00 AM",
+        "shiftStartDate": "Aug 3, 2018",
+        "shiftStartTime": "8:00 AM",
+        "mustBeCompletedBy": "Fri, Aug 03, 06:30 PM",
+        "shiftLength": "10h 30m",
+        "shiftBreakTime": "0m",
+        "shiftBreakTimeInt": 0,
+        "fullName": "Parker Self"
+      }
+    ],
+    "companyReasons": [
+      {
+        "text": "other"
+      },
+      {
+        "text": "Others"
+      },
+      {
+        "text": "Family Emergency"
+      },
+      {
+        "text": "No internet"
+      },
+      {
+        "text": "Public Holiday"
+      },
+      {
+        "text": "Vacation"
+      },
+      {
+        "text": "Sick"
+      }
+    ]
+  }
+]

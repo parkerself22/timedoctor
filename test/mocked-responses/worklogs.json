@@ -1,0 +1,124 @@
+{
+  "start_time": "2018-08-01 00:00:00",
+  "end_time": "2018-08-02 23:59:59",
+  "total": 165815,
+  "url": "https:\/\/webapi.timedoctor.com\/v1.1\/companies\/413748\/worklogs?start_date=2018-08-01&end_date=2018-08-02&offset=0&limit=10&consolidated=1&breaks_only=0",
+  "worklogs": {
+    "count": 10,
+    "url": "",
+    "offset": 0,
+    "limit": 10,
+    "items": [
+      {
+        "id": "1724924444",
+        "length": "49668",
+        "user_id": "603836",
+        "user_name": "Scott  Moran ",
+        "task_id": "34863493",
+        "task_name": "ID | Internal Meeting",
+        "task_url": "",
+        "project_id": "1351375",
+        "project_name": "ID | Ink Daze"
+      },
+      {
+        "id": "1729113590",
+        "length": "32418",
+        "user_id": "603836",
+        "user_name": "Scott  Moran ",
+        "task_id": "39898171",
+        "task_name": "-BD | Internal Meeting",
+        "task_url": "",
+        "project_id": "1572675",
+        "project_name": "-BD | Business Development"
+      },
+      {
+        "id": "1729140066",
+        "length": "23640",
+        "user_id": "603836",
+        "user_name": "Scott  Moran ",
+        "task_id": "33515649",
+        "task_name": "SM | Mgmt Meeting",
+        "task_url": "",
+        "project_id": "1293637",
+        "project_name": "-SM | Staff Management"
+      },
+      {
+        "id": "1738830274",
+        "length": "4860",
+        "user_id": "603836",
+        "user_name": "Scott  Moran ",
+        "task_id": "37074037",
+        "task_name": "ID | Meetings",
+        "task_url": "",
+        "project_id": "1351375",
+        "project_name": "ID | Ink Daze"
+      },
+      {
+        "id": "1729140474",
+        "length": "4320",
+        "user_id": "603836",
+        "user_name": "Scott  Moran ",
+        "task_id": "42267288",
+        "task_name": "-SM | Scott Admin Onboarding",
+        "task_url": "",
+        "project_id": "1293637",
+        "project_name": "-SM | Staff Management"
+      },
+      {
+        "id": "1725142958",
+        "length": "29",
+        "user_id": "603836",
+        "user_name": "Scott  Moran ",
+        "task_id": "41740826",
+        "task_name": "Add additional ads to adwords",
+        "task_url": "https:\/\/go2staff.teamwork.com\/tasks\/10669941",
+        "project_id": "1465633",
+        "project_name": "ID | Ink Daze"
+      },
+      {
+        "id": "1725151066",
+        "length": "24735",
+        "user_id": "604064",
+        "user_name": "Paula Vanessa  Mendoza ",
+        "task_id": "35955457",
+        "task_name": "GT | Lead Gen Management",
+        "task_url": "",
+        "project_id": "1424635",
+        "project_name": "GT | GarageTek"
+      },
+      {
+        "id": "1724444912",
+        "length": "19923",
+        "user_id": "604064",
+        "user_name": "Paula Vanessa  Mendoza ",
+        "task_id": "37672517",
+        "task_name": "RS | Lead Gen",
+        "task_url": "",
+        "project_id": "1504429",
+        "project_name": "RS | Rhyno Studios"
+      },
+      {
+        "id": "1725161366",
+        "length": "3648",
+        "user_id": "604064",
+        "user_name": "Paula Vanessa  Mendoza ",
+        "task_id": "39523587",
+        "task_name": "GO2 Gen | GameTime",
+        "task_url": "",
+        "project_id": "896237",
+        "project_name": "GO2 Gen"
+      },
+      {
+        "id": "1724373922",
+        "length": "2574",
+        "user_id": "604064",
+        "user_name": "Paula Vanessa  Mendoza ",
+        "task_id": "37672521",
+        "task_name": "RS | SoD\/EoD",
+        "task_url": "",
+        "project_id": "1504429",
+        "project_name": "RS | Rhyno Studios"
+      }
+    ]
+  }
+}

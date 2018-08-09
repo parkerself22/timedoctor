@@ -1,0 +1,39 @@
+{
+  "name": "timedoctor",
+  "version": "1.0.0",
+  "description": "Client Package for Interacting with the TimeDoctor API.",
+  "main": "index.js",
+  "scripts": {
+    "test":  "NODE_ENV=test nyc npm run mocha && npm run coverage",
+    "coverage": "nyc report --reporter=lcov",
+    "mocha": "mocha --require co-mocha --timeout 5000 --exit test/**.test.js"
+  },
+  "keywords": [
+    "timedoctor"
+  ],
+  "author": "Parker Self",
+  "license": "ISC",
+  "dependencies": {
+    "async-retry": "^1.2.1",
+    "express": "^4.16.3",
+    "node-fetch": "^2.2.0",
+    "puppeteer": "^1.6.2",
+    "request": "^2.87.0",
+    "request-promise-native": "^1.0.5"
+  },
+  "devDependencies": {
+    "@semantic-release/changelog": "^3.0.0",
+    "@semantic-release/git": "^7.0.1",
+    "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
+    "co-mocha": "^1.2.2",
+    "cross-env": "^5.2.0",
+    "dotenv": "^6.0.0",
+    "mocha": "^5.2.0",
+    "nock": "^9.5.0",
+    "nyc": "^12.0.2",
+    "semantic-release": "^15.9.5",
+    "sinon": "^6.1.4",
+    "sinon-chai": "^3.2.0"
+  }
+}
