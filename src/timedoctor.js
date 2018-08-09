@@ -44,12 +44,13 @@ class Timedoctor {
      * @return {Promise}
      */
     async query(options = {}, company_id = this.company_id) {
-        if(!company_id) {
+        const tokens = await this.Auth.getTokens();
+        if(!company_id || !tokens) {
             return this.handleError("You must provide a company ID!")
         }
 
         if(options.qs && !options.qs.access_token) {
-            options.qs.access_token = this.Auth.access_token ? this.Auth.access_token : await this.Auth.getTokens().access_token;
+            options.qs.access_token = tokens.access_token;
         }
 
         options = Object.assign({

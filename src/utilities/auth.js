@@ -19,13 +19,23 @@ class Auth {
         this.getTokens = getTokens;
         this.setTokens = setTokens;
 
-        let tokens = this.getTokens();
-
-        this.access_token = tokens.access_token;
-        this.refresh_token = tokens.refresh_token;
-
         this.client_key = client_key
         this.client_secret = client_secret
+    }
+
+    async getAuth() {
+        if(this.access_token) {
+            return {
+                access_token: this.access_token,
+                refresh_token: this.refresh_token
+            }
+        } else {
+            try {
+                return await this.getTokens();
+            } catch(e) {
+                return false;
+            }
+        }
     }
 
     async refresh() {
@@ -43,11 +53,12 @@ class Auth {
                 }
             })
             if(response.error) {
+                console.error(response.error);
                 return;
             }
             this.access_token = response.access_token
             this.refresh_token = response.refresh_token
-            this.setTokens(this.access_token, this.refresh_token);
+            await this.setTokens(this.access_token, this.refresh_token);
         } catch(e) {
             console.error(e);
         }
