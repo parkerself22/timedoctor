@@ -3,7 +3,7 @@
 /**
  * @class AbsentLate
  * @property {Timedoctor} td
- * @property {function(params?)} get
+ * @property {function(start_date: Date, end_date: Date, params?)} get
  * @property {function(reasons, params?)} put
  */
 class AbsentLate {
@@ -14,17 +14,21 @@ class AbsentLate {
         this.td = td;
     }
     /**
-     * Get all the users
-     * @param params {{userId?: String, start_date?: Date, end_date?: Date, offset?: number, limit?: number}}
-     * @return {Promise}
+     * @typedef {Object} AbsentReturn
+     * @property {{shiftStartTs: number, mustBeCompletedByTs: number, minimumHoursSec: number, hoursWorkedInt: number}} schedules
+     * @property {[]} companyReasons
      */
-    get(params = {}) {
-        if(params.start_date)  {
-            params.start_date = this.td.toTDDate(params.start_date)
-        }
-        if(params.end_date)  {
-            params.end_date = this.td.toTDDate(params.end_date)
-        }
+    /**
+     * Get all the users
+     * @param {Date} start_date
+     * @param {Date} end_date
+     * @param {{userId?: <String|number>, offset?: number, limit?: number}} params
+     * @return {Promise<AbsentReturn>} return
+     */
+    get(start_date, end_date, params = {}) {
+        params.start = this.td.toTDDate(start_date);
+        params.end = this.td.toTDDate(end_date);
+
         let options = {
             uri: `/absent-and-late`,
             qs: params

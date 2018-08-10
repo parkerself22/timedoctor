@@ -17,7 +17,7 @@ describe("AbsentLate", () => {
             })
             .reply(200, absentJson);
 
-        let result = await AbsentLate.get();
+        let result = await AbsentLate.get(new Date(), new Date());
 
         result.error.should.eq(false);
         result.errorMessage.should.eq(false);

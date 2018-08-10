@@ -14,6 +14,12 @@ const {timedoctor, setup} = require("timedoctor");
 ```
 
 ### Get initial access and refresh token
+This is not the ideal way to handle this, if you email Timedoctor support and ask
+for password grant access which will allow you to to get tokens via one GET call to:
+```
+https://webapi.timedoctor.com/oauth/v2/token?client_id=<CK>&client_secret=<CS>&grant_type=password&username=<EMAIL>&password=<PW>&consolidated=0
+```
+
 A valid access and refresh token are required to initialize the package.
 These can be generated using the setup function, which will run an express server
 you can use to get the tokens.
