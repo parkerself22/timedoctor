@@ -26,8 +26,8 @@ class AbsentLate {
      * @return {Promise<AbsentReturn>} return
      */
     get(start_date, end_date, params = {}) {
-        params.start = this.td.toTDDate(start_date);
-        params.end = this.td.toTDDate(end_date);
+        params.start_date = this.td.toTDDate(start_date);
+        params.end_date = this.td.toTDDate(end_date);
 
         let options = {
             uri: `/absent-and-late`,
