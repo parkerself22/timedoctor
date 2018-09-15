@@ -1,0 +1,14 @@
+[
+  {
+    "full_name": "Test User",
+    "email": "test@test.com",
+    "user_id": 604858,
+    "websites_and_apps": [
+      {
+        "name": "photoshop cc",
+        "timeSpend": 8015,
+        "timeType": "apps"
+      }
+    ]
+  }
+]

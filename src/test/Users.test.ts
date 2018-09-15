@@ -1,5 +1,6 @@
 import "mocha";
 import "chai";
+import helpers from "./helpers";
 const {describe, it, after, before, afterEach, beforeEach} = require("mocha");
 let chai = require('chai');
 const {should, expect} = chai;
@@ -10,7 +11,7 @@ const nock = require('nock');
 chai.should();
 const sinon = require('sinon');
 
-const {td, company_id} = require("./helpers");
+const {td, company_id} = helpers;
 const users = td.Users,
     userJson = require("../../data/mocked-responses/getUser.json"),
     usersJson = require("../../data/mocked-responses/getUsers.json");
@@ -23,7 +24,7 @@ describe("Users", () => {
             })
             .reply(200, userJson);
 
-        let result = await users.getUser(1234);
+        let result = await users.getUser("1234") as any;
 
         result.error.should.eq(false);
         result.errorMessage.should.eq(false);
@@ -39,7 +40,7 @@ describe("Users", () => {
             })
             .reply(200, usersJson);
 
-        let result = await users.getUsers(["parker@go2impact.com"]);
+        let result = await users.getUsers(["parker@go2impact.com"]) as any;
 
         result.error.should.eq(false);
         result.errorMessage.should.eq(false);

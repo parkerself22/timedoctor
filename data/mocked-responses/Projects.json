@@ -1,0 +1,23 @@
+{
+  "count": "1",
+  "url": "https://webapi.timedoctor.com/v1.1/companies/11/users/111/projects/?all=0&offset=1&limit=2",
+  "offset": 1,
+  "limit": "2",
+  "projects": [
+    {
+      "project_id": 1298767,
+      "project_source": "TD",
+      "project_name": "T | TEST",
+      "archived": false,
+      "url": "https://webapi.timedoctor.com/v1.1/companies/11/users/111/projects/123",
+      "users": [
+        1024609,
+        1352179,
+        611816,
+        949833,
+        1207247,
+        981447
+      ]
+    }
+  ]
+}

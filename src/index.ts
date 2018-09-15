@@ -2,6 +2,11 @@
 import {getTokens, setTokens} from "./Timedoctor";
 import Timedoctor from "./Timedoctor"
 import AbsentLate from "./AbsentLate";
+import Payrolls from './Payrolls';
+import Poortime from './Poortime';
+import Projects from './Projects';
+import Tasks from './Tasks';
+import WebAppUsage from './WebAppUsage';
 import Users from "./Users";
 import Worklogs from "./Worklogs";
 import Companies from "./Companies";
@@ -21,11 +26,16 @@ function timedoctor(getTokens: getTokens, setTokens: setTokens, company_id: stri
         throw new Error('You must provide getTokens and setTokens functions')
     }
     const api = {
-        Timedoctor: Timedoctor,
-        AbsentLate: AbsentLate,
-        Users: Users,
-        Worklogs: Worklogs,
-        Companies: Companies
+        Timedoctor,
+        AbsentLate,
+        Users,
+        Worklogs,
+        Payrolls,
+        Poortime,
+        Projects,
+        Tasks,
+        WebAppUsage,
+        Companies
     };
     const base = new api.Timedoctor(getTokens, setTokens, company_id, client_key, client_secret);
 
@@ -34,7 +44,13 @@ function timedoctor(getTokens: getTokens, setTokens: setTokens, company_id: stri
         Companies: new api.Companies(base),
         AbsentLate: new api.AbsentLate(base),
         Users: new api.Users(base),
-        Worklogs: new api.Worklogs(base)
+        Worklogs: new api.Worklogs(base),
+        Poortime: new api.Poortime(base),
+        Payrolls: new api.Payrolls(base),
+        Projects: new api.Projects(base),
+        Tasks: new api.Tasks(base),
+        WebAppUsage: new api.WebAppUsage(base),
+
     }
 }
 export default timedoctor;

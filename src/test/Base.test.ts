@@ -10,13 +10,14 @@ const nock = require('nock');
 chai.should();
 const sinon = require('sinon');
 import Timedoctor from "../Timedoctor";
-const {company_id, saveTokens, getTokens} = require("./helpers");
-const companyJson = require("../../data/mocked-responses/company.json");
+import helpers from './helpers';
+const {company_id, saveTokens, getTokens} = helpers;
+const companyJson = require("../../data/mocked-responses/Company.json");
 
 
 describe("Timedoctor", () => {
     it("has a default props", async () => {
-        const instance = new Timedoctor(getTokens, saveTokens(), company_id, "test", "test")
+        const instance = new Timedoctor(getTokens, saveTokens, company_id, "test", "test")
         expect(instance).to.have.property("company_id");
         expect(instance).to.have.property("Auth");
     });

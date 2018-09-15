@@ -1,7 +1,10 @@
 import "mocha";
 import "chai";
+import helpers from "./helpers";
+import {Request, Response} from "express";
 
-const {describe, it, after, before, afterEach, beforeEach} = require("mocha");
+const {td} = helpers;
+const {describe, it} = require("mocha");
 let chai = require('chai');
 const {should, expect} = chai;
 const chaiAsPromised = require('chai-as-promised');
@@ -11,15 +14,12 @@ const nock = require('nock');
 chai.should();
 const sinon = require('sinon');
 
-const {td, company_id} = require("./helpers");
-const Auth = td.Base.Auth,
-    worklogsJson = require("../../data/mocked-responses/worklogs.json");
+const Auth = td.Base.Auth;
 
 describe("utilities/Auth", () => {
     it("get the OAuth Url", async () => {
         let url = Auth.getAuthUrl("r");
-        url.should.eq(`https://webapi.timedoctor.com/oauth/v2/auth?client_id=${td.Base.Auth.client_key}&response_type=code&redirect_uri=r`)
-
+        expect(url).to.eq(`https://webapi.timedoctor.com/oauth/v2/auth?client_id=${td.Base.Auth.client_key}&response_type=code&redirect_uri=r`)
     });
 
     it("calls saveToken after refreshing", async () => {
@@ -31,8 +31,8 @@ describe("utilities/Auth", () => {
         let stub = sinon.stub(td.Base.Auth, "setTokens");
         await td.Base.Auth.refresh();
 
-        td.Base.Auth.refresh_token.should.eq("1234")
-        td.Base.Auth.access_token.should.eq("1234")
+        expect(td.Base.Auth.refresh_token).to.eq("1234");
+        expect(td.Base.Auth.access_token).to.eq("1234");
         stub.called.should.eq(true);
     });
 
@@ -44,14 +44,15 @@ describe("utilities/Auth", () => {
             .reply(200, {access_token: "1234", refresh_token: "1234"});
         const res = {
             send: sinon.spy()
-        }
+        } as Response;
         const req = {
-            query: {code: "1234"}
-        }
+            query: {code: "1234"},
+        } as Request;
         await td.Base.Auth.handleCallback(req, res, "test.com");
 
-        res.send.called.should.eq(true);
-        res.send.getCall(0).args[0].should.eq("Access Token: 1234 \nRefresh Token: 1234")
+        let responseSpy = res.send as any;
+        expect(responseSpy.called).to.eq(true);
+        expect(responseSpy.getCall(0).args[0]).to.eq("Access Token: 1234 \nRefresh Token: 1234")
     });
 
     it("handles the OAuth callback ERROR", async () => {
@@ -62,13 +63,14 @@ describe("utilities/Auth", () => {
             .reply(200, {error: "test"});
         const res = {
             send: sinon.spy()
-        }
+        } as Response;
         const req = {
             query: {code: "1234"}
-        }
+        } as Request;
         await td.Base.Auth.handleCallback(req, res, "test.com");
 
-        res.send.called.should.eq(true);
-        res.send.getCall(0).args[0].should.eq("Error: test")
+        let responseSpy = res.send as any;
+        expect(responseSpy.called).to.eq(true);
+        expect(responseSpy.getCall(0).args[0]).to.eq("Error: test")
     })
 });

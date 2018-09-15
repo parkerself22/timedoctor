@@ -1,4 +1,6 @@
 import "mocha";
+import helpers from "./helpers";
+const {td, company_id} = helpers;
 const {describe, it, after, before, afterEach, beforeEach} = require("mocha");
 let chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
@@ -7,9 +9,8 @@ chai.use(require('sinon-chai'));
 const nock = require('nock');
 chai.should();
 
-const {td, company_id} = require("./helpers");
 const AbsentLate = td.AbsentLate,
-    absentJson = require("../../data/mocked-responses/absentLate.json");
+    absentJson = require("../../data/mocked-responses/AbsentLate.json");
 
 describe("AbsentLate", () => {
     it("GET /absent-and-late", async () => {
@@ -19,7 +20,7 @@ describe("AbsentLate", () => {
             })
             .reply(200, absentJson);
 
-        let result = await AbsentLate.get(new Date(), new Date());
+        let result = await AbsentLate.get(new Date(), new Date()) as any;
 
         result.error.should.eq(false);
         result.errorMessage.should.eq(false);
@@ -35,7 +36,7 @@ describe("AbsentLate", () => {
             })
             .reply(200, absentJson);
 
-        let result = await AbsentLate.put(["test"]);
+        let result = await AbsentLate.put(["test"]) as any;
 
         result.error.should.eq(false);
         result.errorMessage.should.eq(false);

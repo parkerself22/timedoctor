@@ -1,5 +1,6 @@
 import "mocha";
 import "chai";
+import helpers from "./helpers";
 const {describe, it, after, before, afterEach, beforeEach} = require("mocha");
 let chai = require('chai');
 const {should, expect} = chai;
@@ -10,9 +11,9 @@ const nock = require('nock');
 chai.should();
 
 
-const {td, company_id} = require("./helpers");
+const {td, company_id} = helpers;
 const worklogs = td.Worklogs,
-    worklogsJson = require("../../data/mocked-responses/worklogs.json");
+    worklogsJson = require("../../data/mocked-responses/Worklogs.json");
 
 describe("Worklogs", () => {
     it("GET /worklogs", async () => {
@@ -22,7 +23,7 @@ describe("Worklogs", () => {
             })
             .reply(200, worklogsJson);
 
-        let result = await worklogs.get(new Date(worklogsJson.start_time), new Date(worklogsJson.end_time), {limit: 10});
+        let result = await worklogs.get(new Date(worklogsJson.start_time), new Date(worklogsJson.end_time), {limit: 10}) as any;
 
         result.error.should.eq(false);
         result.errorMessage.should.eq(false);
@@ -37,7 +38,7 @@ describe("Worklogs", () => {
             })
             .reply(404, "test");
 
-        let result = await worklogs.get(new Date(worklogsJson.start_time), new Date(worklogsJson.end_time), {limit: 10});
+        let result = await worklogs.get(new Date(worklogsJson.start_time), new Date(worklogsJson.end_time), {limit: 10}) as any;
 
         result.error.should.eq(true);
         result.errorMessage.error.should.eq("test");

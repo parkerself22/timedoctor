@@ -15,5 +15,7 @@ const td = timedoctor(getTokens, saveTokens,
     process.env.TD_CS ? process.env.TD_CS : ""),
     company_id = process.env.TD_COMPANY;
 
-module.exports = {td, company_id, saveTokens, getTokens};
+const helpers = {td, company_id, saveTokens, getTokens};
+
+export default helpers;
 

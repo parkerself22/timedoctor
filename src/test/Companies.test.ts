@@ -1,17 +1,16 @@
 import "mocha";
 import "chai";
-const {describe, it, after, before, afterEach, beforeEach} = require("mocha");
+import helpers from "./helpers";
+const {describe, it} = require("mocha");
 let chai = require('chai');
-const {should, expect} = chai;
 const chaiAsPromised = require('chai-as-promised');
 chai.use(chaiAsPromised);
 chai.use(require('sinon-chai'));
 const nock = require('nock');
 chai.should();
-const sinon = require('sinon');
 
-const {td, company_id} = require("./helpers");
-const companyJson = require("../../data/mocked-responses/company.json");
+const {td} = helpers;
+const companyJson = require("../../data/mocked-responses/Company.json");
 
 describe("Companies", () => {
     it("GET /companies", async() => {
@@ -22,26 +21,28 @@ describe("Companies", () => {
             })
             .reply(200, companyJson);
 
-        let result = await instance.get();
+        let result = await instance.get() as any;
 
         result.error.should.eq(false);
         result.errorMessage.should.eq(false);
         result.response.should.be.an("object");
-        result.response.accounts.should.be.an("array")
-        result.response.user.should.be.an("object")
+        result.response.accounts.should.be.an("array");
+        result.response.user.should.be.an("object");
     });
 
     it("sets company id for the base instance", () => {
-        const instance = td.Companies;
-        let newId = Math.random()
+        const fakeTd = td as any;
+        const instance = fakeTd.Companies as any;
+        let newId = Math.random() as any;
         instance.set(newId);
 
         instance.td.company_id.should.eq(newId);
-        Object.keys(td).forEach(key => {
-            if(key !== "Base") {
-                td[key].td.company_id.should.eq(newId);
+        Object.keys(td).forEach((key) => {
+            let k = key as any;
+            if(k !== "Base") {
+                fakeTd[k].td.company_id.should.eq(newId);
             } else {
-                td[key].company_id.should.eq(newId);
+                fakeTd[k].company_id.should.eq(newId);
             }
         })
     });

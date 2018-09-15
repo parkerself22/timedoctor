@@ -1,6 +1,6 @@
-const Users = require( "../../dist/users");
-const Worklogs = require("../../dist/worklogs");
-const AbsentLate = require("../../dist/absent-late");
+const Users = require( "../../dist/Users");
+const Worklogs = require("../../dist/Worklogs");
+const AbsentLate = require("../../dist/AbsentLate");
 let chai = require('chai'),
     expect = chai.expect;
 const chaiAsPromised = require('chai-as-promised');

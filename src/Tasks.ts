@@ -34,6 +34,13 @@ export type TaskPost = {
     user_id?: number,
     task_link?: string
 }
+export type TaskUpdate = {
+    task_name: string,
+    project_id?: number,
+    category_id?: number,
+    user_id?: number,
+    task_link?: string
+}
 
 /**
  * @class Tasks
@@ -46,7 +53,6 @@ export default class Tasks {
      * @param td {Timedoctor}
      */
     td: Timedoctor;
-
     constructor(td: Timedoctor) {
         this.td = td;
     }
@@ -60,7 +66,7 @@ export default class Tasks {
     list(user_id: string, params: TasksQuery = {}) {
 
         let options = {
-            uri: `/users/${user_id}`,
+            uri: `/users/${user_id}/tasks`,
             qs: params
         };
         return this.td.query<TasksResponse[]>(options);
@@ -106,7 +112,7 @@ export default class Tasks {
      * @param {TaskPost} task
      * @return {Promise<TDResponse<TasksResponse[]>>}
      */
-    update(user_id: string, task_id: string, task: TaskPost) {
+    update(user_id: string, task_id: string, task: TaskUpdate) {
 
         let body = {
             task
@@ -118,5 +124,4 @@ export default class Tasks {
         };
         return this.td.query<TasksResponse[]>(options);
     }
-
 }

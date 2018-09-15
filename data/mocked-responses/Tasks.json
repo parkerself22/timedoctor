@@ -1,0 +1,19 @@
+{
+  "count": "433",
+  "url": "https://webapi.timedoctor.com/v1.1/companies/1111/users/111/tasks?status=active&offset=1&limit=2",
+  "offset": 1,
+  "limit": "2",
+  "tasks": [
+    {
+      "task_id": 1111,
+      "project_id": 1293637,
+      "project_name": "-SM | Test",
+      "task_name": "T | Test",
+      "active": true,
+      "user_id": 949833,
+      "assigned_by": 1349937,
+      "url": "https://webapi.timedoctor.com/v1.1/companies/1111/users/1111/tasks/1111",
+      "task_link": ""
+    }
+  ]
+}

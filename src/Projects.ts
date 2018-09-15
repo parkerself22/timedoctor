@@ -49,7 +49,7 @@ export default class Projects {
     list(user_id: string, params: ProjectsQuery = {}) {
         
         let options = {
-            uri: `/users/${user_id}`,
+            uri: `/users/${user_id}/projects`,
             qs: params
         };
         return this.td.query<ProjectsResponse[]>(options);
@@ -151,7 +151,7 @@ export default class Projects {
                 assign_users: Array.isArray(assign_users) ? assign_users.join(",") : assign_users,
             };
         let options = {
-            uri: `/users/${user_id}/projects/${project_id}`,
+            uri: `/users/${user_id}/projects/${project_id}/users`,
             method: "DELETE",
             body
         };
