@@ -17,6 +17,9 @@ const users = td.Users,
     usersJson = require("../../data/mocked-responses/getUsers.json");
 
 describe("Users", () => {
+    before(() => {
+        nock.cleanAll();
+    });
     it("GET /users/:id", async () => {
         nock(`https://webapi.timedoctor.com/v1.1/companies/${company_id}`)
             .get(function(uri:string) {

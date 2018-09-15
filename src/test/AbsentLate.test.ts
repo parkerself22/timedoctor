@@ -13,6 +13,9 @@ const AbsentLate = td.AbsentLate,
     absentJson = require("../../data/mocked-responses/AbsentLate.json");
 
 describe("AbsentLate", () => {
+    before(() => {
+        nock.cleanAll();
+    });
     it("GET /absent-and-late", async () => {
         nock(`https://webapi.timedoctor.com/v1.1/companies/${company_id}`)
             .get(function(uri: string) {

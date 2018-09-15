@@ -15,6 +15,9 @@ const poortime = td.Poortime,
     poortimeResponse = require("../../data/mocked-responses/Poortime.json");
 
 describe("Poortime", () => {
+    before(() => {
+        nock.cleanAll();
+    });
     it("GET /poortime", async () => {
         nock(`https://webapi.timedoctor.com/v1.1/companies/${company_id}`)
             .get(function (uri: string) {

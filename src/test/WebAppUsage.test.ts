@@ -15,7 +15,9 @@ const appUsage = helpers.td.WebAppUsage,
     webResp = require("../../data/mocked-responses/WebAppUsage.json");
 
 describe("WebAppUsage", () => {
-
+    before(() => {
+        nock.cleanAll();
+    });
     it("LISTS /webandapp", async () => {
         nock(`https://webapi.timedoctor.com/v1.1/companies/${helpers.company_id}`)
             .get(function (uri: string) {

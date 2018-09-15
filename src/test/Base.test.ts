@@ -16,6 +16,10 @@ const companyJson = require("../../data/mocked-responses/Company.json");
 
 
 describe("Timedoctor", () => {
+    before(() => {
+        nock.cleanAll();
+    });
+
     it("has a default props", async () => {
         const instance = new Timedoctor(getTokens, saveTokens, company_id, "test", "test")
         expect(instance).to.have.property("company_id");
@@ -47,7 +51,7 @@ describe("Timedoctor", () => {
 
     it("attempts to refresh on invalid grant errors", async () => {
         const instance = new Timedoctor(getTokens, saveTokens, "12233", "test", "test");
-        let spy = sinon.spy(instance, "handleInvalidGrant");
+        let spy = sinon.stub(instance, "handleInvalidGrant");
         nock(`https://webapi.timedoctor.com/v1.1`)
             .get(function(uri: string) {
                 return uri.indexOf("/companies") >= 0;
@@ -59,7 +63,7 @@ describe("Timedoctor", () => {
 
     it("calls the API again after refreshing token", async () => {
         const instance = new Timedoctor(getTokens, saveTokens, "12233", "test", "test");
-        let spy = sinon.spy(instance.Auth, "refresh");
+        let spy = sinon.stub(instance.Auth, "refresh");
 
         //first call invalid grant
         nock(`https://webapi.timedoctor.com/v1.1`)

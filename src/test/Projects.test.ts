@@ -15,6 +15,9 @@ const projects = helpers.td.Projects,
     projRes = require("../../data/mocked-responses/Projects.json");
 
 describe("Projects", () => {
+    before(() => {
+        nock.cleanAll();
+    });
     it("GET /project/:project_id", async () => {
         nock(`https://webapi.timedoctor.com/v1.1/companies/${helpers.company_id}`)
             .get(function (uri: string) {

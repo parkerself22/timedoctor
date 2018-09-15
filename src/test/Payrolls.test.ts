@@ -14,6 +14,9 @@ chai.should();
 const payrolls = helpers.td.Payrolls;
 
 describe("Payrolls", () => {
+    before(() => {
+        nock.cleanAll();
+    });
     it("GET /payrolls", async () => {
         nock(`https://webapi.timedoctor.com/v1.1/companies/${helpers.company_id}`)
             .get(function (uri: string) {

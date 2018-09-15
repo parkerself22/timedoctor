@@ -1,6 +1,7 @@
 import "mocha";
 import "chai";
 import helpers from "./helpers";
+
 const {describe, it, after, before, afterEach, beforeEach} = require("mocha");
 let chai = require('chai');
 const {should, expect} = chai;
@@ -16,6 +17,9 @@ const worklogs = td.Worklogs,
     worklogsJson = require("../../data/mocked-responses/Worklogs.json");
 
 describe("Worklogs", () => {
+    before(() => {
+        nock.cleanAll();
+    });
     it("GET /worklogs", async () => {
         nock(`https://webapi.timedoctor.com/v1.1/companies/${company_id}`)
             .get(function (uri: string) {
