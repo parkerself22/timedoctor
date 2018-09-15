@@ -1,4 +1,4 @@
 const setup = require("./setup"),
-    timedoctor = require('./src/index');
+    timedoctor = require('./dist/index');
 
 module.exports = { setup, timedoctor }

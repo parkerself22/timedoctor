@@ -6,7 +6,11 @@
   "scripts": {
     "test": "NODE_ENV=test nyc npm run mocha && npm run coverage",
     "coverage": "nyc report --reporter=lcov",
-    "mocha": "mocha --require co-mocha --timeout 3000 --exit dist/test/**.test.js"
+    "mocha": "mocha --require co-mocha --timeout 3000 --exit dist/test/**.test.js",
+    "prepare": "npm run build-ts",
+    "build-ts": "npm run clean-ts && npm run compile-ts",
+    "clean-ts": "rm -rf ./dist && mkdir ./dist",
+    "compile-ts": "tsc -p ./ --listEmittedFiles"
   },
   "keywords": [
     "timedoctor"
