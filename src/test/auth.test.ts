@@ -1,15 +1,19 @@
-let sinon = require('sinon');
+import "mocha";
+import "chai";
+
+const {describe, it, after, before, afterEach, beforeEach} = require("mocha");
 let chai = require('chai');
-let { expect } = chai;
+const {should, expect} = chai;
 const chaiAsPromised = require('chai-as-promised');
 chai.use(chaiAsPromised);
 chai.use(require('sinon-chai'));
-const nock = require('nock')
+const nock = require('nock');
 chai.should();
+const sinon = require('sinon');
 
 const {td, company_id} = require("./helpers");
 const Auth = td.Base.Auth,
-    worklogsJson = require("./mocked-responses/worklogs.json");
+    worklogsJson = require("../../data/mocked-responses/worklogs.json");
 
 describe("utilities/Auth", () => {
     it("get the OAuth Url", async () => {
@@ -20,7 +24,7 @@ describe("utilities/Auth", () => {
 
     it("calls saveToken after refreshing", async () => {
         nock(`https://webapi.timedoctor.com/oauth/v2/}`)
-            .get(function(uri) {
+            .get(function (uri: string) {
                 return uri.indexOf("/token") >= 0;
             })
             .reply(200, {access_token: "1234", refresh_token: "1234"});
@@ -34,7 +38,7 @@ describe("utilities/Auth", () => {
 
     it("handles the OAuth callback SUCCESS", async () => {
         nock(`https://webapi.timedoctor.com/oauth/v2/}`)
-            .get(function(uri) {
+            .get(function (uri: string) {
                 return uri.indexOf("/token") >= 0 && uri.indexOf("test.com") >= 0;
             })
             .reply(200, {access_token: "1234", refresh_token: "1234"});
@@ -52,7 +56,7 @@ describe("utilities/Auth", () => {
 
     it("handles the OAuth callback ERROR", async () => {
         nock(`https://webapi.timedoctor.com/oauth/v2/}`)
-            .get(function(uri) {
+            .get(function (uri: string) {
                 return uri.indexOf("/token") >= 0 && uri.indexOf("test.com") >= 0;
             })
             .reply(200, {error: "test"});

@@ -1,15 +1,34 @@
-'use strict'
-const request = require("request-promise-native"),
-    /** @class Auth */
-    Auth = require("./utilities/auth");
+'use strict';
+const request = require("request-promise-native");
+
+/** @class Auth */
+import Auth from "./Auth";
+
+export type GetTokenRes = {
+    access_token: string,
+    refresh_token: string
+}
+
+export type getTokens = () => Promise<GetTokenRes>
+
+export type setTokens = (access_token: string, refresh_token: string) => void;
+
+export type TDResponse<ResponseType> = {
+    error: boolean,
+    errorMessage: false,
+    response: ResponseType|null
+}
+
 /**
  * @class Timedoctor
  * @property Auth {Auth}
  * @property company_id {number}
  *
  */
-class Timedoctor {
-    constructor(getTokens, setTokens, company_id, client_key, client_secret) {
+export default class Timedoctor {
+    company_id: string;
+    Auth: Auth;
+    constructor(getTokens: getTokens, setTokens: setTokens, company_id: any, client_key: string, client_secret: string) {
        this.company_id = company_id;
        this.Auth = new Auth(getTokens, setTokens, client_key, client_secret);
     }
@@ -20,7 +39,7 @@ class Timedoctor {
      * @param  message {String?}
      * @return {Promise}
      */
-    handleError(message = 'Fatal error occured') {
+    handleError(message:string = 'Fatal error occured') {
         return Promise.reject(message);
     }
 
@@ -29,7 +48,7 @@ class Timedoctor {
      * @param date {Date}
      * @return {String}
      */
-    toTDDate(date) {
+    toTDDate(date: Date) {
         if(isNaN(date.valueOf())) {
             return date;
         }
@@ -43,7 +62,7 @@ class Timedoctor {
      * @param company_id {number?}
      * @return {Promise}
      */
-    async query(options = {}, company_id = this.company_id) {
+    async query<R>(options: {[k:string]: any} = {}, company_id = this.company_id): Promise<TDResponse<R>> {
         const tokens = await this.Auth.getTokens();
         if(!company_id || !tokens) {
             return this.handleError("You must provide a company ID!")
@@ -70,7 +89,7 @@ class Timedoctor {
             };
         } catch(e) {
             if(e.statusCode === 401 && e.error.error === "invalid_grant") {
-                return await this.handleInvalidGrant(options);
+                return await this.handleInvalidGrant<R>(options);
             }
             return {
                 error: true,
@@ -85,9 +104,12 @@ class Timedoctor {
      * @param options {Object}
      * @return {Promise.<*>}
      */
-    async handleInvalidGrant(options) {
+    async handleInvalidGrant<R>(options: {[k:string]: any}): Promise<TDResponse<R>> {
         try {
             await this.Auth.refresh();
+            if(!options.qs) {
+                options.qs = {};
+            }
             options.qs.access_token = this.Auth.access_token;
             let result = await request(options);
             return {
@@ -104,4 +126,3 @@ class Timedoctor {
         }
     }
 }
-module.exports = Timedoctor;

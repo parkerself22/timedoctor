@@ -1,16 +1,39 @@
-'use strict'
+'use strict';
+import Timedoctor, {TDResponse} from "./Timedoctor";
+import {UserResponse} from "./Users";
+
 const request = require("request-promise-native");
+
+export type CompanyItem = {
+    user_id: number,
+    company_id: number,
+    type: string,
+    company_name: string,
+    url: string,
+    company_time_zone_id: number,
+    company_time_zone: string,
+    company_subdomain: string,
+    company_logo: string,
+    new_user: 0|1,
+    force_project: boolean,
+    managers_add_edit_projects: boolean
+}
+export type CompaniesResponse = {
+    user: UserResponse,
+    accounts: CompanyItem[]
+}
 /**
  * @class Companies
  * @property td {Timedoctor}
  * @property get {function()}
  * @property set {function(company_id)}
  */
-class Companies {
+export default class Companies {
     /**
      * @param td {Timedoctor}
      */
-    constructor(td) {
+    td: Timedoctor;
+    constructor(td: Timedoctor) {
         this.td = td;
     }
     /**
@@ -18,7 +41,7 @@ class Companies {
      * (this is the only endpoint accessible without company_id)
      * @return {Promise}
      */
-    async get() {
+    async get(): Promise<TDResponse<CompaniesResponse>> {
         try {
             let response = await request({
                 method: 'GET',
@@ -44,8 +67,7 @@ class Companies {
      * Set the company_id
      * @param company_id {number}
      */
-    set(company_id) {
+    set(company_id: string) {
         this.td.company_id = company_id;
     }
 }
-module.exports = Companies;

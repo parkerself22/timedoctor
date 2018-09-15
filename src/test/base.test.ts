@@ -1,15 +1,17 @@
-let sinon = require('sinon');
+import "mocha";
+import "chai";
+const {describe, it, after, before, afterEach, beforeEach} = require("mocha");
 let chai = require('chai');
-let { expect } = chai;
+const {should, expect} = chai;
 const chaiAsPromised = require('chai-as-promised');
 chai.use(chaiAsPromised);
 chai.use(require('sinon-chai'));
-const nock = require('nock')
+const nock = require('nock');
 chai.should();
-
-const Timedoctor = require("../src/timedoctor");
+const sinon = require('sinon');
+import Timedoctor from "../Timedoctor";
 const {company_id, saveTokens, getTokens} = require("./helpers");
-const companyJson = require("./mocked-responses/company.json");
+const companyJson = require("../../data/mocked-responses/company.json");
 
 
 describe("Timedoctor", () => {
@@ -21,20 +23,20 @@ describe("Timedoctor", () => {
 
     it("handles errors", async () => {
         const instance = new Timedoctor(getTokens, saveTokens, company_id, "test", "test");
-        return instance.handleError(new Error("test")).should.be.rejected;
+        expect(instance.handleError("test")).to.be.rejected;
     });
 
     it("requires company id to call an endpoint", async () => {
-        const instance = new Timedoctor(getTokens, saveTokens, false, "test", "test");
-        return instance.query().should.be.rejected;
+        const instance = new Timedoctor(getTokens, saveTokens, null, "test", "test");
+        return expect(instance.query()).to.be.rejected;
     });
 
     it("ensures token is on the API call", async() => {
         const mockGetTokens = sinon.spy(getTokens);
-        const instance = new Timedoctor(mockGetTokens, saveTokens, 12233, "test", "test");
+        const instance = new Timedoctor(mockGetTokens, saveTokens, "12233", "test", "test");
 
         nock(`https://webapi.timedoctor.com/v1.1`)
-            .get(function(uri) {
+            .get(function(uri: string) {
                 return uri.indexOf("/companies") >= 0;
             })
             .reply(200, companyJson);
@@ -43,48 +45,53 @@ describe("Timedoctor", () => {
     });
 
     it("attempts to refresh on invalid grant errors", async () => {
-        const instance = new Timedoctor(getTokens, saveTokens, 12233, "test", "test");
-        instance.handleInvalidGrant = sinon.spy();
+        const instance = new Timedoctor(getTokens, saveTokens, "12233", "test", "test");
+        let spy = sinon.spy(instance, "handleInvalidGrant");
         nock(`https://webapi.timedoctor.com/v1.1`)
-            .get(function(uri) {
+            .get(function(uri: string) {
                 return uri.indexOf("/companies") >= 0;
             })
             .reply(401, {error: "invalid_grant"});
         await instance.query();
-        instance.handleInvalidGrant.called.should.eq(true);
+        expect(spy.called).to.eq(true);
     });
 
     it("calls the API again after refreshing token", async () => {
-        const instance = new Timedoctor(getTokens, saveTokens, 12233, "test", "test");
-        instance.Auth.refresh = sinon.spy();
+        const instance = new Timedoctor(getTokens, saveTokens, "12233", "test", "test");
+        let spy = sinon.spy(instance.Auth, "refresh");
 
         //first call invalid grant
         nock(`https://webapi.timedoctor.com/v1.1`)
-            .get(function(uri) {
+            .get(function(uri: string) {
                 return uri.indexOf("/companies") >= 0;
             }).reply(401, {error: "invalid_grant"});
 
         nock(`https://webapi.timedoctor.com/v1.1`)
-            .get(function(uri) {
+            .get(function(uri: string) {
                 return uri.indexOf("/companies") >= 0;
             }).reply(200, companyJson);
 
+        nock(`https://webapi.timedoctor.com`)
+            .get(function(uri: string) {
+                return uri.indexOf("token") >= 0;
+            }).reply(200, {access_token: "tt", refresh_token: "ttt"});
+
         let result = await instance.query();
 
-        instance.Auth.refresh.called.should.eq(true);
-        result.error.should.eq(false);
+        expect(spy.called).to.eq(true);
+        expect(result.error).to.eq(false);
     });
 
     it("returns an error elsewise", async () => {
-        const instance = new Timedoctor(getTokens, saveTokens, 12233, "test", "test");
+        const instance = new Timedoctor(getTokens, saveTokens, "12233", "test", "test");
         nock(`https://webapi.timedoctor.com/v1.1`)
-            .get(function(uri) {
+            .get(function(uri: string) {
                 return uri.indexOf("/companies") >= 0;
             })
             .reply(404, {error: "not invalid_grant"});
 
         let response = await instance.query();
-        response.error.should.eq(true);
+        expect(response.error).to.eq(true);
     })
 
 });

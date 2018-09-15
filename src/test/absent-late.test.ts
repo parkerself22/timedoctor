@@ -1,18 +1,20 @@
+import "mocha";
+const {describe, it, after, before, afterEach, beforeEach} = require("mocha");
 let chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
 chai.use(chaiAsPromised);
 chai.use(require('sinon-chai'));
-const nock = require('nock')
+const nock = require('nock');
 chai.should();
 
 const {td, company_id} = require("./helpers");
 const AbsentLate = td.AbsentLate,
-    absentJson = require("./mocked-responses/absentLate.json");
+    absentJson = require("../../data/mocked-responses/absentLate.json");
 
 describe("AbsentLate", () => {
     it("GET /absent-and-late", async () => {
         nock(`https://webapi.timedoctor.com/v1.1/companies/${company_id}`)
-            .get(function(uri) {
+            .get(function(uri: string) {
                 return uri.indexOf("/absent") >= 0;
             })
             .reply(200, absentJson);
@@ -28,7 +30,7 @@ describe("AbsentLate", () => {
 
     it("PUT /absent-and-late", async () => {
         nock(`https://webapi.timedoctor.com/v1.1/companies/${company_id}`)
-            .put(function(uri) {
+            .put(function(uri: string) {
                 return uri.indexOf("/absent") >= 0;
             })
             .reply(200, absentJson);
@@ -37,7 +39,6 @@ describe("AbsentLate", () => {
 
         result.error.should.eq(false);
         result.errorMessage.should.eq(false);
-
     });
 
 });

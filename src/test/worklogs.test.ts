@@ -1,20 +1,23 @@
-let sinon = require('sinon');
+import "mocha";
+import "chai";
+const {describe, it, after, before, afterEach, beforeEach} = require("mocha");
 let chai = require('chai');
-let { expect } = chai;
+const {should, expect} = chai;
 const chaiAsPromised = require('chai-as-promised');
 chai.use(chaiAsPromised);
 chai.use(require('sinon-chai'));
-const nock = require('nock')
+const nock = require('nock');
 chai.should();
+
 
 const {td, company_id} = require("./helpers");
 const worklogs = td.Worklogs,
-    worklogsJson = require("./mocked-responses/worklogs.json");
+    worklogsJson = require("../../data/mocked-responses/worklogs.json");
 
 describe("Worklogs", () => {
     it("GET /worklogs", async () => {
         nock(`https://webapi.timedoctor.com/v1.1/companies/${company_id}`)
-            .get(function(uri) {
+            .get(function (uri: string) {
                 return uri.indexOf("/worklogs") >= 0;
             })
             .reply(200, worklogsJson);
@@ -29,7 +32,7 @@ describe("Worklogs", () => {
     });
     it("handles errors", async () => {
         nock(`https://webapi.timedoctor.com/v1.1/companies/${company_id}`)
-            .get(function(uri) {
+            .get(function (uri: string) {
                 return uri.indexOf("/worklogs") >= 0;
             })
             .reply(404, "test");
@@ -38,6 +41,6 @@ describe("Worklogs", () => {
 
         result.error.should.eq(true);
         result.errorMessage.error.should.eq("test");
-        (!!result.response).should.eq(false)
+        expect(!!result.response).to.eq(false)
     });
 });
