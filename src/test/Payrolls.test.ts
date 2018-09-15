@@ -24,7 +24,7 @@ describe("Payrolls", () => {
             })
             .reply(200, []);
 
-        let result = await payrolls.get();
+        let result = await payrolls.list();
 
         expect(result.error).to.eq(false);
         expect(result.errorMessage).to.eq(false);

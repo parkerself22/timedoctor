@@ -116,14 +116,14 @@ export default class Projects {
      * @param {string} archived
      * @return {Promise<TDResponse<ProjectsResponse[]>>}
      */
-    update(user_id: string, assign_users: string[]|"include_all", project_id: string, name?: string, archived?: string) {
+    update(user_id: string, assign_users: string[]|"include_all", project_id: string, name?: string, archived?: boolean) {
 
         let project: {[k:string]:any} = {};
         if(name) {
             project.name = name;
         }
         if(archived) {
-            project.name = archived;
+            project.name = archived ? "0" : "1";
         }
         let body = {
                 assign_users: Array.isArray(assign_users) ? assign_users.join(",") : assign_users,

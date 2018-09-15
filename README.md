@@ -108,7 +108,7 @@ async getTokens() {
 
 #### Response Format
 All function calls return the following structure:
-```ts
+```js
 result = {
     error: boolean,
     errorMessage: null|string,
@@ -232,80 +232,142 @@ result.response = {
 tdApi.Companies.set(company_id);
 ```
 
+### Payrolls
+#### List
+```js
+tdApi.Payrolls.list()
+```
+### Poortime
+#### Get
+```js
+tdApi.Projects.get(start_date: Date, end_date: Date, params: {} = {});
+```
+### Projects
+#### List
+```js
+tdApi.Projects.list(user_id, params = {});
+```
+#### Get
+```js
+tdApi.Projects.get(user_id, project_id);
+```
+#### Delete
+```js
+tdApi.Projects.delete(user_id, project_id);
+```
+#### Create
+```js
+tdApi.Projects.create(user_id: string, assign_users: string[]|"include_all", name: string);
+```
+#### Update
+```js
+tdApi.Projects.update(user_id: string, assign_users: string[]|"include_all", name = null, archived: boolean = false);
+```
+#### Unassign from user
+```js
+tdApi.Projects.unassign(user_id: string, assign_users: string[]|"include_all", project_id);
+```
+
+### Tasks
+#### List
+```js
+tdApi.Tasks.list(user_id, params = {});
+```
+#### Get
+```js
+tdApi.Tasks.get(user_id, project_id);
+```
+#### Create
+```js
+tdApi.Tasks.create(user_id: string, task: {});
+```
+#### Update
+```js
+tdApi.Tasks.update(user_id: string, task_id: string, task: {});
+```
+
+
 ### Users
-#### Get a list of users, optionally filter by email
+#### List
 ```js
 const result = await tdApi.Users.getUsers(emails);
 // data structure
 result.response = {
-                    "count": 1,
-                    "url": "https:\/\/webapi.timedoctor.com\/v1.1\/companies\/1234\/users",
-                    "users": [
-                      {
-                        "full_name": "Parker Self",
-                        "first_name": "Parker  Self",
-                        "last_name": "",
-                        "email": "parker@test.com",
-                        "url": "https:\/\/webapi.timedoctor.com\/v1.1\/companies\/1234\/users\/1234",
-                        "user_id": 1234,
-                        "company_id": 1,
-                        "level": "admin",
-                        "projects": {
-                          "currently_assigned": {
-                            "count": "156",
-                            "url": "https:\/\/webapi.timedoctor.com\/v1.1\/companies\/1234\/users\/1234\/projects?all=0"
-                          },
-                          "all": {
-                            "count": "739",
-                            "url": "https:\/\/webapi.timedoctor.com\/v1.1\/companies\/1234\/users\/1234\/projects?all=1"
-                          }
-                        },
-                        "tasks": {
-                          "all": {
-                            "count": 1935,
-                            "url": "https:\/\/webapi.timedoctor.com\/v1.1\/companies\/1234\/users\/1234\/tasks?status=all"
-                          },
-                          "active": {
-                            "count": 393,
-                            "url": "https:\/\/webapi.timedoctor.com\/v1.1\/companies\/1234\/users\/1234\/tasks?status=active"
-                          }
-                        },
-                        "work_status": {
-                          "code": "offline",
-                          "info": "Offline",
-                          "current_task": null
-                        },
-                        "managed_users": [],
-                        "teams": [],
-                        "payroll_access": 1,
-                        "billing_access": 1,
-                        "avatar": "https:\/\/s3.amazonaws.com\/tds3_avatars\/1234.jpg",
-                        "screenshots_active": "0",
-                        "manual_time": "1",
-                        "permanent_tasks": 1,
-                        "computer_time_popup": "540",
-                        "poor_time_popup": "-1",
-                        "blur_screenshots": 0,
-                        "web_and_app_monitoring": "1",
-                        "webcam_shots": 0,
-                        "screenshots_interval": "9",
-                        "user_role_value": null,
-                        "status": "active",
-                        "reports_hidden": false
-                      }
-                    ]
-                  }
+    "count": 1,
+    "url": "https:\/\/webapi.timedoctor.com\/v1.1\/companies\/1234\/users",
+    "users": [
+      {
+        "full_name": "Parker Self",
+        "first_name": "Parker  Self",
+        "last_name": "",
+        "email": "parker@test.com",
+        "url": "https:\/\/webapi.timedoctor.com\/v1.1\/companies\/1234\/users\/1234",
+        "user_id": 1234,
+        "company_id": 1,
+        "level": "admin",
+        "projects": {
+          "currently_assigned": {
+            "count": "156",
+            "url": "https:\/\/webapi.timedoctor.com\/v1.1\/companies\/1234\/users\/1234\/projects?all=0"
+          },
+          "all": {
+            "count": "739",
+            "url": "https:\/\/webapi.timedoctor.com\/v1.1\/companies\/1234\/users\/1234\/projects?all=1"
+          }
+        },
+        "tasks": {
+          "all": {
+            "count": 1935,
+            "url": "https:\/\/webapi.timedoctor.com\/v1.1\/companies\/1234\/users\/1234\/tasks?status=all"
+          },
+          "active": {
+            "count": 393,
+            "url": "https:\/\/webapi.timedoctor.com\/v1.1\/companies\/1234\/users\/1234\/tasks?status=active"
+          }
+        },
+        "work_status": {
+          "code": "offline",
+          "info": "Offline",
+          "current_task": null
+        },
+        "managed_users": [],
+        "teams": [],
+        "payroll_access": 1,
+        "billing_access": 1,
+        "avatar": "https:\/\/s3.amazonaws.com\/tds3_avatars\/1234.jpg",
+        "screenshots_active": "0",
+        "manual_time": "1",
+        "permanent_tasks": 1,
+        "computer_time_popup": "540",
+        "poor_time_popup": "-1",
+        "blur_screenshots": 0,
+        "web_and_app_monitoring": "1",
+        "webcam_shots": 0,
+        "screenshots_interval": "9",
+        "user_role_value": null,
+        "status": "active",
+        "reports_hidden": false
+      }
+    ]
+  }
 ```
 
-#### Get a single user by ID
+#### Get
 ```js
 let result = await tdApi.Users.getUser(user_id);
 // result.response is an user object (see above)
 ```
 
+### Web and App Usage
+#### Get
+```js
+const start = new Date("8/10/2018");
+const end = new Date();
+tdApi.WebApps.get(start_date: Date, end_date: Date, user_id: string, params: WebAppsQuery = {});
+```
 
 ### Worklogs
-#### Get worklogs
+#### Get
 ```js
 const start = new Date("8/10/2018");
 const end = new Date();

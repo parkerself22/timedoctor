@@ -29,7 +29,7 @@ export default class Payroll {
      * @param {{userId?: <String|number>, offset?: number, limit?: number}} params
      * @return {Promise<PayrollResponse>} return
      */
-    get(params: PayrollQuery = {}) {
+    list(params: PayrollQuery = {}) {
         let options = {
             uri: `/payrolls`,
             qs: params
