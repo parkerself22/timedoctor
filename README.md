@@ -1,4 +1,25 @@
 # Timedoctor API
+  * [Installation](#installation)
+  * [Getting Started](#getting-started)
+    + [Get initial access and refresh token](#get-initial-access-and-refresh-token)
+      - [Request Password Grant from TD](#request-password-grant-from-td)
+      - [Workaround](#workaround)
+    + [Calling the API](#calling-the-api)
+      - [Example getTokens](#example-gettokens)
+      - [Response Format](#response-format)
+  * [Methods](#methods)
+    + [Absent & Late](#absent--late)
+      - [Get a list of absent & late reasons, plus shifts (if applicable)](#get-a-list-of-absent--late-reasons-plus-shifts-if-applicable)
+      - [Add reason(s) to the absent/late reasons list](#add-reasons-to-the-absentlate-reasons-list)
+    + [Companies](#companies)
+      - [Get all companies the user has access to](#get-all-companies-the-user-has-access-to)
+      - [Set the company_id for the instance](#set-the-company_id-for-the-instance)
+    + [Users](#users)
+      - [Get a list of users, optionally filter by email](#get-a-list-of-users-optionally-filter-by-email)
+      - [Get a single user by ID](#get-a-single-user-by-id)
+    + [Worklogs](#worklogs)
+      - [Get worklogs](#get-worklogs)
+
 
 This is a basic library for interacting with the [Timedoctor REST API](https://webapi.timedoctor.com/doc#webandapp)
 
