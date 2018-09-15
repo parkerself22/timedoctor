@@ -1,6 +1,6 @@
 {
   "name": "timedoctor",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Client Package for Interacting with the TimeDoctor API.",
   "main": "index.js",
   "types": "index.d.ts",
