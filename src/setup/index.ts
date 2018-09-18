@@ -4,31 +4,33 @@
  * @param client_secret {string}
  * @param redirect_base {string}
  */
-function setup(client_key, client_secret, redirect_base) {
+import {NextFunction, Request, Response} from "express";
+
+function setup(client_key: string, client_secret: string, redirect_base: string): void {
     function getTokens() {
         return {access_token: false, refresh_token: false};
     }
-    function setTokens(access, refresh) {
+    function setTokens(access: string, refresh: string) {
         console.log("Access: " + access);
         console.log("Refresh: " + refresh);
     }
 
-    const td = require("../src/index")(getTokens, setTokens, false, client_key, client_secret),
+    const td = require("../index")(getTokens, setTokens, false, client_key, client_secret),
         express = require('express'),
         app = express();
 
     const redirectUri = redirect_base + "/auth/timedoctor";
 
-    app.get("/login", (req,res) => {
+    app.get("/login", (req: Request,res: Response) => {
         res.redirect(td.Base.Auth.getAuthUrl(redirectUri))
     });
 
-    app.use("/auth/timedoctor", async (req,res,next) => {
+    app.use("/auth/timedoctor", async (req: Request,res: Response, next: NextFunction) => {
         await td.Base.Auth.handleCallback(req,res,redirectUri);
     });
-    app.get("/", (req,res) => {
+    app.get("/", (req: Request,res: Response) => {
         res.send("Ok");
-    })
+    });
 
     const port = (process.env.PORT || 3000);
 
@@ -36,4 +38,4 @@ function setup(client_key, client_secret, redirect_base) {
         console.log("running!");
     });
 }
-module.exports = setup;
+export default setup;

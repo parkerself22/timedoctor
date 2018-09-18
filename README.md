@@ -48,7 +48,7 @@ npm i -s timedoctor
 
 ## Getting Started
 ```js
-const {timedoctor, setup} = require("timedoctor");
+const TDApi = require("timedoctor");
 ```
 
 ### Get initial access and refresh token
@@ -71,7 +71,7 @@ and provided a redirect_url with an `/auth/timedoctor` endpoint.
 ```js
 // no trailing slash
 const redirect_url = "https://e147b7eb.ngrok.io";
-setup(process.env.TD_CK, process.env.TD_CS, redirect_base);
+TDApi.setup(process.env.TD_CK, process.env.TD_CS, redirect_base);
 ```
 
 Now visit `<your_redirect_url>`/login.
@@ -85,8 +85,8 @@ use the instance, which automatically handles refreshing tokens by passing them 
 `setTokens` function.
 
 ```js
-const {timedoctor, setup} = require("timedoctor");
-const tdApi = timedoctor(getTokens, setTokens, process.env.TD_COMPANY, process.env.TD_CK, process.env.TD_CS);
+const TDApi = require("timedoctor");
+const tdApi = new TDApi(getTokens, setTokens, process.env.TD_COMPANY, process.env.TD_CK, process.env.TD_CS);
 await tdApi.Users.getUser(user_id);
 ```
 #### Example getTokens

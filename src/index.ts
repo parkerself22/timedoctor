@@ -1,56 +1,48 @@
 'use strict';
-import {getTokens, setTokens} from "./Timedoctor";
-import Timedoctor from "./Timedoctor"
-import AbsentLate from "./AbsentLate";
-import Payrolls from './Payrolls';
-import Poortime from './Poortime';
-import Projects from './Projects';
-import Tasks from './Tasks';
-import WebAppUsage from './WebAppUsage';
-import Users from "./Users";
-import Worklogs from "./Worklogs";
-import Companies from "./Companies";
-/**
- * @param getTokens {getTokens}
- * @param setTokens {setTokens}
- * @param company_id {string}
- * @param client_key {string}
- * @param client_secret {string}
- * @return {{Companies, AbsentLate, Users, Worklogs, Base: Timedoctor}}
- */
-function timedoctor(getTokens: getTokens, setTokens: setTokens, company_id: string, client_key: string, client_secret: string) {
-    if( !client_secret || !client_key ) {
-        throw new Error('You must provide client credentials!')
-    }
-    if(!getTokens || !setTokens || typeof getTokens !== "function" || typeof setTokens !== "function") {
-        throw new Error('You must provide getTokens and setTokens functions')
-    }
-    const api = {
-        Timedoctor,
-        AbsentLate,
-        Users,
-        Worklogs,
-        Payrolls,
-        Poortime,
-        Projects,
-        Tasks,
-        WebAppUsage,
-        Companies
-    };
-    const base = new api.Timedoctor(getTokens, setTokens, company_id, client_key, client_secret);
+import {getTokens, setTokens} from "./api/Timedoctor";
+import Timedoctor from "./api/Timedoctor"
+import AbsentLate from "./api/AbsentLate";
+import Payrolls from './api/Payrolls';
+import Poortime from './api/Poortime';
+import Projects from './api/Projects';
+import Tasks from './api/Tasks';
+import WebAppUsage from './api/WebAppUsage';
+import Users from "./api/Users";
+import Worklogs from "./api/Worklogs";
+import Companies from "./api/Companies";
+import setup from "./setup";
 
-    return {
-        Base: base,
-        Companies: new api.Companies(base),
-        AbsentLate: new api.AbsentLate(base),
-        Users: new api.Users(base),
-        Worklogs: new api.Worklogs(base),
-        Poortime: new api.Poortime(base),
-        Payrolls: new api.Payrolls(base),
-        Projects: new api.Projects(base),
-        Tasks: new api.Tasks(base),
-        WebAppUsage: new api.WebAppUsage(base),
+class TDApi {
+    Base: Timedoctor;
+    Companies: Companies;
+    AbsentLate: AbsentLate;
+    Users: Users;
+    Worklogs: Worklogs;
+    Poortime: Poortime;
+    Payrolls: Payrolls;
+    Projects: Projects;
+    Tasks: Tasks;
+    WebAppUsage: WebAppUsage;
+    constructor(getTokens: getTokens, setTokens: setTokens, company_id: string, client_key: string, client_secret: string) {
+        if( !client_secret || !client_key ) {
+            throw new Error('You must provide client credentials!')
+        }
+        if(!getTokens || !setTokens || typeof getTokens !== "function" || typeof setTokens !== "function") {
+            throw new Error('You must provide getTokens and setTokens functions')
+        }
+        const base = new Timedoctor(getTokens, setTokens, company_id, client_key, client_secret);
 
+        this.Base = base;
+        this.Companies = new Companies(base);
+        this.AbsentLate = new AbsentLate(base);
+        this.Users = new Users(base);
+        this.Worklogs = new Worklogs(base);
+        this.Poortime = new Poortime(base);
+        this.Payrolls = new Payrolls(base);
+        this.Projects = new Projects(base);
+        this.Tasks = new Tasks(base);
+        this.WebAppUsage = new WebAppUsage(base);
     }
+    static setup = setup;
 }
-export default timedoctor;
+export = TDApi;

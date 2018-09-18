@@ -40,7 +40,6 @@ describe("AbsentLate", () => {
             .reply(200, absentJson);
 
         let result = await AbsentLate.put(["test"]) as any;
-
         result.error.should.eq(false);
         result.errorMessage.should.eq(false);
     });
