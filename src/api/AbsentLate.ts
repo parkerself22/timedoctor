@@ -75,7 +75,7 @@ export default class AbsentLate {
      * @param {Date} start_date
      * @param {Date} end_date
      * @param {{userId?: <String|number>, offset?: number, limit?: number}} params
-     * @return {Promise<AbsentLateResponse>} return
+     * @return {Promise<AbsentLateResponse[]>} return
      */
     get(start_date: Date, end_date:Date, params: AbsentLateQuery = {}) {
         let query = Object.assign({
@@ -87,7 +87,7 @@ export default class AbsentLate {
             uri: `/absent-and-late`,
             qs: query
         };
-        return this.td.query<AbsentLateResponse>(options);
+        return this.td.query<AbsentLateResponse[]>(options);
     }
 
     /**
