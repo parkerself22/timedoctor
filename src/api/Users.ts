@@ -54,6 +54,11 @@ export type UserResponse = {
     reports_hidden: null|string
 }
 
+export type UserListResponse = {
+    count: number,
+    url: string,
+    users: UserResponse[]
+}
 /**
  * @class Users
  * @property td {Timedoctor}
@@ -82,7 +87,7 @@ export default class Users {
         if (emails) {
             options.qs = {emails: emails.join(",")};
         }
-        return this.td.query<UserResponse[]>(options);
+        return this.td.query<UserListResponse>(options);
     }
 
     /**
