@@ -75,6 +75,9 @@ export default class Worklogs {
         if (params.last_modified && params.last_modified !== undefined) {
             query.last_modified = this.td.toTDDate(params.last_modified);
         }
+        if(query.user_ids && Array.isArray(query.user_ids)) {
+            query.user_ids = query.user_ids.join(",");
+        }
 
         let options = {
             uri: `/worklogs`,
