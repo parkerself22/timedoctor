@@ -52,27 +52,27 @@ export default class Projects {
             uri: `/users/${user_id}/projects`,
             qs: params
         };
-        return this.td.query<ProjectsResponse[]>(options);
+        return this.td.query<ProjectsResponse>(options);
     }
 
     /**
      * Get a specific project
      * @param {string} user_id
      * @param {string} project_id
-     * @return {Promise<TDResponse<ProjectsResponse[]>>}
+     * @return {Promise<TDResponse<ProjectsResponse>>}
      */
     get(user_id: string, project_id: string) {
         
         let options = {
             uri: `/users/${user_id}/projects/${project_id}`,
         };
-        return this.td.query<ProjectsResponse[]>(options);
+        return this.td.query<ProjectRespObj>(options);
     }
     /**
      * Get a specific project
      * @param {string} user_id
      * @param {string} project_id
-     * @return {Promise<TDResponse<ProjectsResponse[]>>}
+     * @return {Promise<TDResponse<ProjectsResponse>>}
      */
     delete(user_id: string, project_id: string) {
         
@@ -80,7 +80,7 @@ export default class Projects {
             uri: `/users/${user_id}/projects/${project_id}`,
             method: "DELETE"
         };
-        return this.td.query<ProjectsResponse[]>(options);
+        return this.td.query<ProjectsResponse>(options);
     }
     
     /**
@@ -88,7 +88,7 @@ export default class Projects {
      * @param {string} user_id
      * @param {string[]|} assign_users
      * @param name {string} Project name
-     * @return {Promise<TDResponse<ProjectsResponse[]>>}
+     * @return {Promise<TDResponse<ProjectsResponse>>}
      */
     create(user_id: string, assign_users: string[]|"include_all", name: string) {
         let body = {
@@ -103,7 +103,7 @@ export default class Projects {
             method: "POST",
             body
         };
-        return this.td.query<ProjectsResponse[]>(options);
+        return this.td.query<ProjectsResponse>(options);
     }
 
     /**
@@ -114,7 +114,7 @@ export default class Projects {
      * @param {string} project_id
      * @param {string} name
      * @param {string} archived
-     * @return {Promise<TDResponse<ProjectsResponse[]>>}
+     * @return {Promise<TDResponse<ProjectsResponse>>}
      */
     update(user_id: string, assign_users: string[]|"include_all", project_id: string, name?: string, archived?: boolean) {
 
@@ -134,7 +134,7 @@ export default class Projects {
             method: "PUT",
             body
         };
-        return this.td.query<ProjectsResponse[]>(options);
+        return this.td.query<ProjectsResponse>(options);
     }
 
     /**
@@ -143,7 +143,7 @@ export default class Projects {
      * @param {string} user_id
      * @param {string[] | "include_all"} assign_users
      * @param {string} project_id
-     * @return {Promise<TDResponse<ProjectsResponse[]>>}
+     * @return {Promise<TDResponse<ProjectsResponse>>}
      */
     unassign(user_id: string, assign_users: string[]|"include_all", project_id: string) {
 
@@ -155,7 +155,7 @@ export default class Projects {
             method: "DELETE",
             body
         };
-        return this.td.query<ProjectsResponse[]>(options);
+        return this.td.query<ProjectsResponse>(options);
     }
 
 }

@@ -87,7 +87,7 @@ export default class AbsentLate {
             uri: `/absent-and-late`,
             qs: query
         };
-        return this.td.query<AbsentLateResponse[]>(options);
+        return this.td.query<AbsentLateResponse>(options);
     }
 
     /**

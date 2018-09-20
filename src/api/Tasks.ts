@@ -25,7 +25,7 @@ export type TasksResponse = {
     url: string,
     offset: number,
     limit: string,
-    projects: TaskRespObj[]
+    tasks: TaskRespObj[]
 }
 export type TaskPost = {
     task_name: string,
@@ -69,28 +69,28 @@ export default class Tasks {
             uri: `/users/${user_id}/tasks`,
             qs: params
         };
-        return this.td.query<TasksResponse[]>(options);
+        return this.td.query<TasksResponse>(options);
     }
 
     /**
      * Get a specific task
      * @param {string} user_id
      * @param {string} task_id
-     * @return {Promise<TDResponse<TasksResponse[]>>}
+     * @return {Promise<TDResponse<TasksResponse>>}
      */
     get(user_id: string, task_id: string) {
 
         let options = {
             uri: `/users/${user_id}/tasks/${task_id}`,
         };
-        return this.td.query<TasksResponse[]>(options);
+        return this.td.query<TaskRespObj>(options);
     }
 
     /**
      * Create a task
      * @param {string} user_id
      * @param {TaskPost} task
-     * @return {Promise<TDResponse<TasksResponse[]>>}
+     * @return {Promise<TDResponse<TasksResponse>>}
      */
     create(user_id: string, task: TaskPost) {
         let body = {
@@ -102,7 +102,7 @@ export default class Tasks {
             method: "POST",
             body
         };
-        return this.td.query<TasksResponse[]>(options);
+        return this.td.query<TasksResponse>(options);
     }
 
     /**
@@ -110,7 +110,7 @@ export default class Tasks {
      * @param {string} user_id
      * @param {string} task_id
      * @param {TaskPost} task
-     * @return {Promise<TDResponse<TasksResponse[]>>}
+     * @return {Promise<TDResponse<TasksResponse>>}
      */
     update(user_id: string, task_id: string, task: TaskUpdate) {
 
@@ -122,6 +122,6 @@ export default class Tasks {
             method: "PUT",
             body
         };
-        return this.td.query<TasksResponse[]>(options);
+        return this.td.query<TasksResponse>(options);
     }
 }

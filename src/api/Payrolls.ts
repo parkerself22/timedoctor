@@ -34,6 +34,6 @@ export default class Payroll {
             uri: `/payrolls`,
             qs: params
         };
-        return this.td.query<PayrollResponse[]>(options);
+        return this.td.query<PayrollResponse>(options);
     }
 }
