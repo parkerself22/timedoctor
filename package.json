@@ -7,7 +7,7 @@
   "scripts": {
     "test": "NODE_ENV=test nyc npm run mocha && npm run coverage",
     "test-ts": "mocha --require ts-node/register --timeout 0 --exit ./src/test/*.test.ts",
-    "coverage": "nyc report --reporter=lcov",
+    "coverage": "nyc report --reporter=json > coverage/coverage.json && codecov -t aca94382-a93e-46cf-92b6-3cd4355c8526",
     "mocha": "mocha --require co-mocha --timeout 3000 --exit dist/test/**.test.js",
     "prepare": "npm run test-ts && npm run build-ts && npm run test",
     "build-ts": "npm run clean-ts && npm run compile-ts",
@@ -33,6 +33,7 @@
     "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1",
     "co-mocha": "^1.2.2",
+    "codecov": "^3.1.0",
     "cross-env": "^5.2.0",
     "dotenv": "^6.0.0",
     "mocha": "^5.2.0",
