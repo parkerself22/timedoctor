@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 import Timedoctor from "./Timedoctor";
 
 declare type WorklogsParams = {
@@ -15,15 +15,20 @@ declare type WorklogsParams = {
 }
 
 export type WorklogItem = {
-    id: string,
-    length: string,
-    user_id: string,
-    user_name: string,
-    task_id: string,
-    task_name: string,
-    task_url: string,
-    project_id: string,
+    id: string;
+    length: string;
+    user_id: string;
+    user_name: string;
+    task_id: string;
+    task_name: string;
+    task_url: string;
+    project_id: string;
     project_name: string
+    start_time: string;
+    end_time: string;
+    edited: "1" | "0";
+    last_modified: string;
+    work_mode: string
 }
 
 export type WorklogResponse = {
