@@ -81,7 +81,7 @@ describe("Projects", () => {
             })
             .reply(200, []);
 
-        let result = await projects.update("12", "include_all", projId) as any;
+        let result = await projects.update("12", "include_all", projId, "Test") as any;
 
         expect(result.error).to.eq(false);
         expect(result.errorMessage).to.eq(false);
