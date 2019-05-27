@@ -94,7 +94,7 @@ export default class Projects {
         let body = {
             assign_users: Array.isArray(assign_users) ? assign_users.join(","):assign_users,
             project: {
-                name
+                project_name: name
             }
         };
 
