@@ -12,7 +12,7 @@
     "prepare": "npm run test-ts && npm run build-ts && npm run test",
     "build-ts": "npm run clean-ts && npm run compile-ts",
     "clean-ts": "rm -rf ./dist && mkdir ./dist",
-    "compile-ts": "tsc -p ./ --listEmittedFiles"
+    "compile-ts": "tsc -p ./"
   },
   "keywords": [
     "timedoctor"
